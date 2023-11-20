@@ -1,0 +1,167 @@
+//zad1
+byte a =40, b=50;
+byte suma = (byte)(a+b); 
+System.out.println(suma);
+//wyskoczył by błąd gdyby a+b nie było w nawiasie
+//w przypadku typów całkowitoliczbowych mniejszych niż int (takich jak byte, short czy char), operacje są automatycznie promowane do typu int.
+
+
+//zad2
+int x = 4;
+long y = x*4-x++;
+if (y<10) System.out.println("za malo");
+else System.out.println("w sam raz");
+//Wynik: "w sam raz"
+//y=12;x=5
+
+
+//zad3
+int a =1;
+double x;
+if (a>=0) x=1.701;   //nie da sie zainicjowac zmiennej x dopiero w petli. Albo musi miec wpisane wczesniej wartosc domyslna czyli 0
+// ...lub deklaracja tez odbywa sie w petli, ale wtedy nie mozesz wywolac wyniku poza petla. 
+if (a<0) x=2D*3.14f;
+System.out.println(x);
+// jest to spowodowane tym ze zapis double x tworzy miejsce w pamieci - referencje a nie tworzy obiektu, który chcemy zaraz wykorzystac
+//Wynik: błąd kompilacji
+
+
+//zad4
+int i = 10;
+i = i++;                //i staje się 10 (wartość przed zwiększeniem).Jednak po tej operacji i jest zwiększone o 1. Efektem jest, że i staje się 11, ale wynikiem przypisania jest wartość przed zwiększeniem, czyli 10.
+System.out.println(i);
+i = ++i;                // najpierw zwiększamy o 1 czyli 11, a następnie przypisujemy 11 jako i
+System.out.println(i);
+i = i++ + ++i;          // 11 + 13 bo po wykorzystaniu pierwszego, w pamieci zapisana jest 12 a potem podnosimu, czyli 13
+System.out.println(i);
+//Wynik:24
+
+
+//zad5
+int k = 987654321;
+String s = "";
+while (k!=0) {
+    int cyfra = k%10;
+    s = s + cyfra;
+    k = k/10;
+}
+System.out.println(s);
+//Wynik: 123456789
+
+
+//zad6
+boolean x = true, z = true;
+int y = 0x14;                       //20
+x = (y!=10) || (z = false);         //w tym przypadku warunek LUB sprawia, że jesli pierwsza czesc daje true to drugiej nawet nie sprawdza. gdybysmy zamienili to miejscami to jako z przypisano by false.
+System.out.println(x+","+y+","+z);
+//Wynik: true,20,true
+
+
+//zad7
+int x = 0;
+while (x++<10){}
+String msg = (x > 10)? "Wieksze niz" : "false" ;
+System.out.println(msg+", "+x);
+//Wynik: Wieksze niz, 11 
+// x=11 bo jak jestesmy w warunku i x =10 to wychodząc z warunku i tak trzeba wykonać +1
+
+
+//zad8
+do {
+    int y = 3; //gdy tu zdeklarujemy zmienna to w petli while jej nie widac. dodatkowo w kazdej petli wracamy do punktu wyjscia.
+    System.out.println(++y +" ");
+    } while (y <= 10);
+//Wynik: błąd kompilacji bo warunek while nie widzi zmiennej zdeklarowanej wczesniej w petli. ta linijka z deklaracja y powinna być przed pętlą do
+
+
+//zad9
+boolean wykonuj = true;
+int res = 15, i = 10;
+do {
+    i--;
+    if (i==6)
+       wykonuj = false;
+    res -= 2;  
+} while (wykonuj);
+System.out.println(res);
+//Wynik: 7
+//tutaj gdy i=6 i wykonuj ustawiono na false to i tak wykonujemy reszte kodu, czyli odejmujemy jeszcze te 2. dopiero w petli while program dowiaduje sie ze to koniec petli
+
+
+
+//zad10
+for (int i = 0; i<3; i++)
+    for (int j = i; j<3; j++)
+        System.out.println(j-i);
+// wynik: 0;1;2;0;1;0
+
+
+//zad11
+public class Main {
+    public static void main(String[] args) {
+        int a = 10, b = a;
+        char c = 'b';
+        float d = -1e10f;
+        double e = a+3/2;  //11.0
+        String f = "ppj";
+        boolean takCzyNie = !(a<0b1001)&&(b<0x1A);
+        System.out.println("e: "+ e);    
+        System.out.println("takCzyNie:"+takCzyNie);
+ 
+        if (!takCzyNie)   
+            System.out.println("PPJ!!");
+        else if (takCzyNie && (a != b)) {
+            switch (b) {
+                case 1 ->System.out.println("P");
+                case 2 ->System.out.println("P");
+                case 3 ->System.out.println("J");
+                default -> {
+                    b = 4;
+                    c += b;
+                }
+            }
+            System.out.println(b + ", " + c);
+        } else if (d > 0) {
+            switch (b) {
+                case 9 -> System.out.println("J");
+                case 10 -> System.out.println("A");
+                case 11 -> System.out.println("V");
+                default -> System.out.println("a");
+            }
+        } else {
+            c += switch (f) {
+                case "ppj" -> 2;
+                case "tak" -> 3;
+                case "xyz" -> 4;
+                default -> 5;
+            };
+            System.out.println (c != 'd'?c:f);
+        }
+    }
+}
+//Wynik: e: 11.0; takCzyNie:true; ppj
+//wynik2: e: 11.0; takCzyNie:true; 4, f
+//wynik3: e: 11.0; takCzyNie:true; A
+
+
+//zad 12
+((a!=b)||false)&&true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
