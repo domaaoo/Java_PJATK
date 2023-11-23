@@ -1,5 +1,5 @@
 import java.lang.Math;
-public class Program7{
+public class ProgramPowtorzenie{
 	public static void main(String[] args){
 //zad 1 KOMPAS
 	int deg = (int) (Math.random()*360);
