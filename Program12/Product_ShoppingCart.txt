@@ -1,0 +1,61 @@
+public class Main {
+    public static void main(String[] args) {
+        //zad1
+        ShoppingCart shopcart = new ShoppingCart("Dominika");  //tworzenie mojego koszyka
+        Product produkt = new Product("pomarancz",2.34);  //tworzenie nowego produktu
+        Product produkt2 = new Product("jablko",72.7);
+        produkt.addToShoppingCart(shopcart);
+        produkt2.addToShoppingCart(shopcart);
+        //shopcart.addProduct(produkt);   //to niepotrzebne bo juz zawarte w klasie addToShoppingCart
+        shopcart.displayProduct();
+
+    }
+}
+=======================================================================================
+public class Product {
+    public String name;
+    public double price;
+    public ShoppingCart shoppingCart;
+
+    public Product(String nm, double prc){
+        this.name = nm;                   //this jest niepotrzebne bo inne nazwy "name" i "nm"
+        this.price = prc;
+    }
+
+    public void addToShoppingCart(ShoppingCart sc){  //to laczy nam dwie klasy
+        this.shoppingCart = sc;
+        sc.addProduct(this);
+    }
+
+}
+========================================================================================
+import java.sql.SQLOutput;
+
+public class ShoppingCart {
+    public String customerName;
+    public Product[] products;
+    public int productCount;
+
+    public ShoppingCart(String cn){  //konstruktor ktory zapisuje nazwe klienta w polu klasy
+        customerName=cn;
+        products = new Product[5];   //odrazu w konstruktore tworzy sie tablica z produktami
+    }
+
+    public void addProduct(Product product){    //dodaje produkt o typie klasy Product do tablicy jednowymiarowej
+        if (productCount<products.length){
+            products[productCount] = product;
+            productCount++;
+        }else{
+            System.out.println("brak miejsca w koszyku");
+            //lub zwiekszamy tablice dwa razy
+        }
+    }
+
+    public void displayProduct(){
+        System.out.println("twoj produkt to:");
+        for (int i=0;i<productCount;i++){         //petla ktora wyswietla co jest w tablicy produktw czyli w koszyku
+            System.out.println(products[i].name);
+            System.out.println(products[i].price);
+        }
+    }
+}

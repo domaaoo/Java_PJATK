@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      Prostokat prostokat = new Prostokat(10,2);
+      prostokat.wyswietlPolePowierzchni();
+      
+      Prostopadloscian prostopadloscian = new Prostopadloscian(10,1,1);
+      prostopadloscian.getData();
+  }
+}
+----------------------------------------------------------------------
+public class Prostokat {
+  private int bokA;
+  private int bokB;
+
+  public Prostokat(int bokA, int bokB){
+    this.bokB=bokB;
+    this.bokA=bokA;
+  }
+  
+  public int polePowierzchni(){
+    int pole = bokA*bokB;
+    return pole;
+  }
+  
+  public int getBokA(){return bokA;}  //te metody dostepu po to bo pola byly prywatne
+  public int getBokB(){return bokB;}  //...gdyby byly protected to by nie byly te metody potrzebne
+  
+  public void wyswietlPolePowierzchni(){
+    System.out.println("Pole powierzchni tego prostokata to: "+polePowierzchni());
+  }
+}
+--------------------------------------------------------------------------
+public class Prostopadloscian extends Prostokat{
+  private int wysokosc;
+  
+
+  public Prostopadloscian(int bokA, int bokB, int wysokosc){
+    super(bokA, bokB);
+    this.wysokosc=wysokosc;
+  }
+  
+  public void getData(){
+    
+    double objetosc = super.polePowierzchni()*wysokosc;  //nie musi byc super. bo jest tylko jedna taka metoda 
+    double pole = 2* super.polePowierzchni()+2*getBokA()*wysokosc+2*getBokB()*wysokosc;
+    
+    System.out.println("Pole powierzchni to: "+pole+" a objetosc:"+objetosc);
+  }
+
+}

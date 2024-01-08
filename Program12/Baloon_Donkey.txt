@@ -1,0 +1,80 @@
+KLASA MAIN 
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+      Balloon balon = new Balloon();
+      Balloon balon2 = new Balloon();
+      
+      //wczesniej wywolywalismy najpierw getLoad ale przy dodawaniu balonow juz do tablicy z klasy Donkey musi sie to robic automatycznie, dlatego tez dodalam metode getLoad do konstruktora Balloon
+      //balon.getLoad(); 
+      balon.getData(); //metoda ktora pokazuje iile pojemnosci i udzwigu ma balon
+    
+      Donkey osiol = new Donkey(0.007,2); //o wadze 0.007kg i ma nad soba 2 balony
+      osiol.getData();
+      osiol.addBalloon(balon); //nadpisujemy w te dwa balony wczesniej utworzony balony
+      osiol.addBalloon(balon2);
+      
+      boolean czyMozna = osiol.isFlying(); //sprawdzamy czy te dwa balony go uniosa
+      System.out.println(czyMozna);
+
+=====================================================================================
+KLASA BALLOON
+import java.util.*;
+public class Balloon {
+  double pojemnoscHelu;
+  double udzwig;
+
+  public Balloon(){                        //konstruktor domyslny bo bez arg
+    int los=(int)((Math.random() * 5) + 5);//liczba calkowita od 5 do 9
+    double losD= los/1000.;               //zamiana na liczbe tysieczna
+    pojemnoscHelu = losD;
+    getLoad();
+  }
+  
+  public double getLoad(){
+    double x = (pojemnoscHelu*6)/0.007;
+    System.out.println("Metoda getLoad obliczyla tyle gram:"+x);
+    udzwig=x;
+    return (x);
+  }
+  
+  public void getData(){
+    System.out.println("Balon o pojemnosci "+pojemnoscHelu+" moze udzwignac ciezar "+udzwig+" gram.");
+  }
+  
+  
+}
+=====================================================================================
+KLASA DONKEY
+public class Donkey {
+  private double mass;//w kg
+  private Balloon[] tablica;
+
+  public Donkey(double mass,int numberOfBalloons){
+    this.mass=mass;
+    this.tablica = new Balloon[numberOfBalloons];
+  }
+  
+  public void addBalloon(Balloon nowyBalon){
+    for (int i =0;i<tablica.length;i++){
+      if (tablica[i]==null){
+        tablica[i]=nowyBalon;
+        break;
+      }
+    }
+  }
+  
+  public boolean isFlying(){
+    double masaWszystkichBalonow=0; //musi byc zainicjowana zeby dalej dzialalo
+    for (Balloon balon:tablica){
+      masaWszystkichBalonow+=balon.udzwig;
+    }
+    return masaWszystkichBalonow>=(this.mass*1000);
+  }
+  
+  public void getData(){
+    System.out.println("Osiol o wadze: "+mass+"kg ma nad sobą "+ tablica.length+" balonow.");
+  }
+
+}
